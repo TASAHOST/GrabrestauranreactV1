@@ -27,7 +27,7 @@ const Restaurant = () => {
         fetcAllRestaurant();
     },[])
 
-    const handDelete = async (id) =>{
+    const handDelete = async () =>{
         try {
             await axios.delete(`${URL}/restaurants/${id}`, config);
             window.location.reload();

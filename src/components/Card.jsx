@@ -5,6 +5,16 @@ import Update from "../pages/Update";
 
 const Card = ({restaurant,handelDelete}) => {
 
+    const handDelete = async (id) =>{
+        try {
+            await axios.delete(`${URL}/restaurants/${id}`, config);
+            window.location.reload();
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+
     
   return (
       <div className="card" style={{ width: "18rem" }} key={restaurant.id}>
@@ -17,7 +27,7 @@ const Card = ({restaurant,handelDelete}) => {
                 }}>
                   Delete
               </Link>
-              <Link to="./Update" className='btn btn-warning px-2'>
+              <Link to="./Update/:restaurantId" className='btn btn-warning px-2'>
                   Edit
               </Link>
           </div>
