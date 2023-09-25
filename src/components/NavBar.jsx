@@ -42,14 +42,14 @@ const NavBar = () => {
         </li>
 
         <li className="nav-item">
-          <Link className="nav-link" to="signin" >
-            Sign in
+          <Link className="nav-link" to="signup" >
+            Sign Up
             </Link>
         </li>
 
         <li className="nav-item">
-          <Link className="nav-link" to="signup">
-            Sign up
+          <Link className="nav-link" to="signin">
+            Sign In
             </Link>
         </li>
 

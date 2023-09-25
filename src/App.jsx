@@ -8,6 +8,7 @@ import Restaurant from './pages/Restaurant'
 import Add from './pages/Add'
 import Search from './pages/Search'
 import Update from './pages/Update';
+import Signup from './pages/Signup';
 import Signin from './pages/Signin';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
         <Route path="/add" element={<Add />} />
         <Route path="/Search" element={<Search />} />
         <Route path="/Update/:restaurantId" element={<Update />} />
+        <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
       </Routes>
     </div>
