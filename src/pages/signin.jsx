@@ -1,83 +1,88 @@
-import React, {useState} from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import AuthService from '../services/auth.service';
+import axios from 'axios';
 
-const URL = import.meta.env.VITE_BASE_URL;
-const USERNAME = import.meta.env.VITE_BASE_USERNAME;
-const PASSWORD = import.meta.env.VITE_BASE_PASSWORD;
-const config = {
-  auth: {
-    username: USERNAME,
-    password: PASSWORD,
-  },
- 
-  
-};
 
-function Signin() {
-    const [restaurant, setRestaurant] =useState({
-        name:"",
-        type:"",
-        image:""
-      })
-      const navigate = useNavigate();
-      const [error , setError] = useState(false);
-    
-      const handleChange = (e) => {
-        setRestaurant((prev)=>({...prev,[e.target.name]:e.target.value}));
-    
-      }
-    
-     
+const Signin = () => {
+  const [user, setUser] = useState({
+    email: '',
+    password: '',
+  });
+  const navigate = useNavigate();
+  const [error, setError] = useState(false);
+
+  const handleChange = (e) => {
+    setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSignin = async (e) => {
+    e.preventDefault();
+    try {
+      const login = await AuthService.login(user.username, user.password);
+      navigate("/") 
+      // Send a POST request to the sign-in endpoint with user credentials (email and password).
+      await axios.post(`${URL}/signin`, user);
+
+      // Assuming successful sign-in, you can navigate to a dashboard or profile page.
+      navigate('/dashboard');
+    } catch (error) {
+      console.error(error);
+      setError(true);
+    }
+  };
 
   return (
     <div className="container">
-      <h1>Grab Restaurant</h1>
+      <h1>Sign In</h1>
       <div className="row form">
         <div className="col-6 card justify-content-center">
-          <h5 className='card-header'>Sign In</h5>
-          <div className="error">{error && "somethingwrong"}</div>
+          <h5 className="card-header">Login to Your Account</h5>
+          {/* <div className="error">{error && 'Incorrect email or password.'}</div> */}
           <div className="card-body">
-
             <form>
               <div className="form-group">
-                <label htmlFor="name">Username</label>
-                <input 
-                type="text"
-                className='form-control' 
-                name="name" 
-                placeholder='Username'
-                onChange={handleChange}
-                value={restaurant.name} />
+              <label htmlFor="username">Username</label>
+                <input
+                  type="username"
+                  className="form-control"
+                  name="username"
+                  placeholder="username"
+                  onChange={handleChange}
+                  value={user.username}
+                />
               </div>
 
-                
-                  <div className="form-group">
-                    <label htmlFor="image">Password</label>
-                    <input
-                      type="text"
-                      className='form-control'
-                      name="image"
-                      placeholder='Password'
-                      onChange={handleChange} 
-                      value={restaurant.image}/>
-                  </div>
+              <div className="form-group">
+                <label htmlFor="password">Password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  name="password"
+                  placeholder="Password"
+                  onChange={handleChange}
+                  value={user.password}
+                />
+              </div>
 
+              <button
+                type="submit"
+           
+                className="btn btn-success"
+                onClick={handleSignin}
+              >
+                Sign In
+              </button>
 
-                  <Link to="" className='btn btn-success' >
-                    sing in
-                  </Link>
-              <Link to="/" className='btn btn-danger' >
-                    Cancel
-                  </Link>
-
-
+              <Link to="/signup" className="btn btn-secondary">
+                Don't have an account? Sign Up
+              </Link>
             </form>
           </div>
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default Signin
+export default Signin;

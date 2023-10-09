@@ -9,7 +9,8 @@ import Add from './pages/Add'
 import Search from './pages/Search'
 import Update from './pages/Update';
 import Signup from './pages/Signup';
-import Signin from './pages/Signin';
+import Signin from './pages/signin';
+import Logout from './pages/Logout';
 
 function App() {
   
@@ -25,6 +26,7 @@ function App() {
         <Route path="/Update/:restaurantId" element={<Update />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/signin" element={<Signin />} />
+        <Route path="/logout" element={<Logout />} />
       </Routes>
     </div>
     </BrowserRouter>

@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Link} from "react-router-dom";
+import AuthService from '../services/auth.service';
 
 
 const NavBar = () => {
+  const [user, setUser] = useState(AuthService.getCurrentUser);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
   <div className="container-fluid">
@@ -40,18 +42,29 @@ const NavBar = () => {
             Search
             </Link>
         </li>
-
+        {!user &&(
         <li className="nav-item">
           <Link className="nav-link" to="signup" >
             Sign Up
             </Link>
         </li>
+        )}
 
+        {!user &&(
         <li className="nav-item">
           <Link className="nav-link" to="signin">
             Sign In
             </Link>
         </li>
+        )}
+
+        {user &&(
+        <li className="nav-item">
+          <Link className="nav-link" to="logout">
+            Logout
+            </Link>
+        </li>
+        )}
 
         </ul>
     </div>
