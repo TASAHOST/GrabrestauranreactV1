@@ -11,24 +11,41 @@ import Update from './pages/Update';
 import Signup from './pages/Signup';
 import Signin from './pages/signin';
 import Logout from './pages/Logout';
+import Profile from './pages/Profile';
+import NotAllow from './pages/NotAllow';
+import ProtectedRouts from './pages/ProtectedRoute';
+import AdminRoute from './pages/AdminRoute';
+import Layout from './components/Layout';
 
 function App() {
   
 
   return (
     <BrowserRouter>
-    <NavBar/>
-    <div className='App'>
-      <Routes>
-        <Route path="/" element={<Restaurant />} />
-        <Route path="/add" element={<Add />} />
-        <Route path="/Search" element={<Search />} />
-        <Route path="/Update/:restaurantId" element={<Update />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/signin" element={<Signin />} />
-        <Route path="/logout" element={<Logout />} />
+      <Routes >
+          <Route path="/" element={<Layout/>}>
+            <Route index element={<Restaurant />} />
+
+            <Route 
+            path="/add" element=
+            {<AdminRoute>
+              <Add />
+              </AdminRoute>} />
+
+            <Route path="/Search" element=
+            {<ProtectedRouts>
+              <Search />
+              </ProtectedRouts>} />
+            
+            <Route path="/NotAllow" element={<NotAllow />} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/signin" element={<Signin />} />
+            <Route path="/logout" element={<Logout />} /> 
+            <Route path="/Profile" element={<Profile />} />
+            <Route path="/Update/:restaurantId" element=
+            {<Update />} />
+          </Route>
       </Routes>
-    </div>
     </BrowserRouter>
   );
 }

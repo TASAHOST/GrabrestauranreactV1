@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AuthService from '../services/auth.service';
 import axios from 'axios';
+import { useAuthContext } from '../context/AuthContext';
 
 
 const Signin = () => {
@@ -10,6 +11,7 @@ const Signin = () => {
     password: '',
   });
   const navigate = useNavigate();
+  const {login} = useAuthContext();
   const [error, setError] = useState(false);
 
   const handleChange = (e) => {
@@ -19,8 +21,9 @@ const Signin = () => {
   const handleSignin = async (e) => {
     e.preventDefault();
     try {
-      const login = await AuthService.login(user.username, user.password);
-      navigate("/") 
+      const currentUser = await AuthService.login(user.username, user.password);
+      login(currentUser);
+      navigate("/Profile") 
       // Send a POST request to the sign-in endpoint with user credentials (email and password).
       await axios.post(`${URL}/signin`, user);
 

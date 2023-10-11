@@ -1,10 +1,17 @@
 import React, { useState } from 'react';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import AuthService from '../services/auth.service';
+import { useAuthContext } from '../context/AuthContext';
 
 
 const NavBar = () => {
-  const [user, setUser] = useState(AuthService.getCurrentUser);
+ 
+  const {user, logout} = useAuthContext();
+  const navigate = useNavigate();
+  const handlelogout =() =>{
+    logout();
+    navigate("/signin")
+  }
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
   <div className="container-fluid">
@@ -29,13 +36,14 @@ const NavBar = () => {
           aria-current="page" to="/">
             Home</Link>
         </li>
-
+        
+            {user && (
         <li className="nav-item">
           <Link className="nav-link" to="add">
             Add
             </Link>
         </li>
-       
+            )}
         
         <li className="nav-item">
           <Link className="nav-link" to="search">
@@ -59,13 +67,13 @@ const NavBar = () => {
         )}
 
         {user &&(
-        <li className="nav-item">
-          <Link className="nav-link" to="logout">
-            Logout
-            </Link>
-        </li>
+        <div className="from-inline my-2 my-lg-0">
+              <span className="badge">Welcome,<span className="mr-sm2 h4">
+                <Link className='nav-link' to={"Profile"}>{user.username}</Link></span>
+              </span>
+              <button className="btn btn-outline-danger my-2 my-sm-0" onClick={handlelogout}>Logout</button>
+            </div>
         )}
-
         </ul>
     </div>
   </div>
