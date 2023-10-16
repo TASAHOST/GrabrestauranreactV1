@@ -43,7 +43,7 @@ function App() {
             <Route path="/logout" element={<Logout />} /> 
             <Route path="/Profile" element={<Profile />} />
             <Route path="/Update/:restaurantId" element=
-            {<Update />} />
+            {<AdminRoute><Update /></AdminRoute>} />
           </Route>
       </Routes>
     </BrowserRouter>

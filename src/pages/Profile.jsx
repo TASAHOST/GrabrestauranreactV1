@@ -24,7 +24,7 @@ const Profile = () => {
                             <br />
 
                             <ul>
-                                {user.role && 
+                                {user.roles && 
                                 user.roles.map((role, index) => <il key={index}>{role}</il> )}
                             </ul>
                         </div>

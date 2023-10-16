@@ -2,7 +2,7 @@ import { Navigate } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
 
 const AdminRoute = ({ children }) => {
-    const {user} = useAuthContext();
+    const {user} = useAuthContext(null);
     if (!user) {
         return <Navigate to="/signin" />;
 

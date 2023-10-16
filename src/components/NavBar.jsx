@@ -37,7 +37,7 @@ const NavBar = () => {
             Home</Link>
         </li>
         
-            {user && (
+            {user && user.roles.includes("ROLES_ADMIN") &&  (
         <li className="nav-item">
           <Link className="nav-link" to="add">
             Add
