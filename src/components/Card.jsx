@@ -26,7 +26,7 @@ const Card = ({restaurant,handelDelete,user, logout}) => {
                 
               {user && user.roles.includes("ROLES_ADMIN") &&  (
               <Link to="" className='btn btn-danger px-2'onClick={() =>{
-                handelDelete(restaurant.id);
+                handDelete(restaurant.id);
                 }}>
                   Delete
               </Link> )}
